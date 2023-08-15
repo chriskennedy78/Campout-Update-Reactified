@@ -4,6 +4,7 @@ import { selectCabinById } from "../features/cabins/cabinsSlice";
 import CabinDetail from "../features/cabins/CabinDetail";
 // import CommentsList from "../features/comments/CommentsList";
 import SubHeader from "../components/SubHeader";
+import ReservationForm from "../components/ReservationForm";
 
 const CabinDetailPage = () => {
     const { cabinId } = useParams();
@@ -13,14 +14,12 @@ const CabinDetailPage = () => {
         <Container>
             <SubHeader current={cabin.name} detail={true} />
             <Row>
-                <Col>
+                <Col sm="6">
                     <CabinDetail cabin={cabin} />
                     {/* <CommentsList cabinId={cabinId} /> */}
                 </Col>
                 <Col>
-                    <div>
-                        <button>Placeholder for Reservation Modal</button>
-                    </div>
+                    <ReservationForm />
                 </Col>
             </Row>
         </Container>

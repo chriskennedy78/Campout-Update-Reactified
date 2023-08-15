@@ -2,7 +2,7 @@ import { Col, Row } from "reactstrap";
 import CabinCard from "./CabinCard";
 import { selectAllCabins } from "./cabinsSlice";
 
-const CabinsList = () => {
+const CabinsList = ({ cabinId }) => {
     const cabins = selectAllCabins();
     return (
         <Row className="ms-auto">
