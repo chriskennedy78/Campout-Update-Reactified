@@ -21,7 +21,7 @@ const Header = () => {
                     className="float-start"
                     style={{ height: 100, width: 300 }}
                 />
-                <h5 className="mt-5">
+                <h5 className="mt-6">
                     A secluded, natural, getaway for women. Home of the Virginia
                     Women's Music Festival
                 </h5>
