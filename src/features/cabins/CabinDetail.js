@@ -1,7 +1,7 @@
 import { Card, CardImg, CardText, CardBody, Col, Row } from "reactstrap";
 
 const CabinDetail = ({ cabin }) => {
-    const { image, name, description, accommodations } = cabin;
+    const { image, name, description, sleepingArrangements } = cabin;
 
     return (
         <Row>
@@ -14,8 +14,8 @@ const CabinDetail = ({ cabin }) => {
                 <Card>
                     <CardBody>
                         <CardText>
-                            <h3>{accommodations}</h3>
-                            {description}
+                            <h3>{sleepingArrangements}</h3>
+                            <Row>{description}</Row>
                         </CardText>
                     </CardBody>
                 </Card>

@@ -9,7 +9,7 @@ import ReservationForm from "../components/ReservationForm";
 const CabinDetailPage = () => {
     const { cabinId } = useParams();
     const cabin = selectCabinById(cabinId);
-
+    console.log(cabin);
     return (
         <Container>
             <SubHeader current={cabin.name} detail={true} />
@@ -19,7 +19,7 @@ const CabinDetailPage = () => {
                     {/* <CommentsList cabinId={cabinId} /> */}
                 </Col>
                 <Col>
-                    <ReservationForm />
+                    <ReservationForm cabin={cabin} />
                 </Col>
             </Row>
         </Container>

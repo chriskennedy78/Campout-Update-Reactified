@@ -11,7 +11,7 @@ const SubHeader = ({ current, detail }) => {
                     </BreadcrumbItem>
                     {detail && (
                         <BreadcrumbItem>
-                            <Link to="/Cabin Reservations">
+                            <Link to="/CabinReservations">
                                 Cabin Reservations
                             </Link>
                         </BreadcrumbItem>

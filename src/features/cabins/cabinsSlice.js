@@ -15,3 +15,11 @@ export const selectCabinById = (id) => {
 export const selectFeaturedCabin = () => {
     return CABINS.find((cabin) => cabin.featured);
 };
+
+export const selectAccommodationsByBedId = (bedId) => {
+    return CABINS.filter((accommodations) => accommodations.bedId);
+};
+
+export const selectCabinByName = (name) => {
+    return CABINS.find((cabin) => cabin.name);
+};
