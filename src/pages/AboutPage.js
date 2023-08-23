@@ -1,6 +1,6 @@
 import { Col, Row, Container, Card, CardBody, CardHeader } from "reactstrap";
 import SubHeader from "../components/SubHeader";
-// import PartnersList from "../features/partners/PartnersList";
+import ArtistsList from "../features/artists/ArtistsList";
 
 const AboutPage = () => {
     return (
@@ -83,12 +83,12 @@ const AboutPage = () => {
                 </Col>
             </Row>
 
-            {/* <Row className="row-content">
+            <Row className="row-content">
                 <Col xs="12">
-                    <h3>Community Partners</h3>
+                    <h3>Music Festival Artists</h3>
                 </Col>
-                <PartnersList />
-            </Row> */}
+                <ArtistsList />
+            </Row>
         </Container>
     );
 };

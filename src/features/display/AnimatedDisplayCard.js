@@ -21,6 +21,7 @@ const AnimatedDisplayCard = ({ item }) => {
             <Card>
                 <CardImg src={image} alt={name} />
                 <CardBody>
+                    {" "}
                     <CardTitle>{name}</CardTitle>
                     <CardText>{description}</CardText>
                 </CardBody>
