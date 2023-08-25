@@ -36,9 +36,20 @@ const Header = () => {
                         </NavLink>
                     </NavItem>
                     <NavItem>
+                        <NavLink className="nav-link" to="/Memberships">
+                            <i className="fa fa-list fa-lg" /> Memberships
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
                         <NavLink className="nav-link" to="/cabinReservations">
-                            <i className="fa fa-list fa-lg" /> Cabin
-                            Reservations
+                            <i className="fa fa-solid fa-calendar fa-lg" />{" "}
+                            Cabin Reservations
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link" to="/tickets">
+                            <i className="fa fa-solid fa-ticket fa-lg" />{" "}
+                            Tickets
                         </NavLink>
                     </NavItem>
                     <NavItem>
