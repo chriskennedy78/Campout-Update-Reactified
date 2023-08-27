@@ -15,7 +15,7 @@ const MembershipPage = () => {
     return (
         <Container>
             <SubHeader current="Memberships" />
-            <h1>Memberships</h1>
+            <h1>Membership Types</h1>
             <Row className="row-content">
                 <Col>
                     <MembershipList />

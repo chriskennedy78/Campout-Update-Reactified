@@ -25,6 +25,12 @@ export const validateReservationForm = (values) => {
     if (!values.email.includes("@")) {
         errors.email = "Email should contain a @";
     }
+    if (!values.cabinName) {
+        errors.cabinName = "required";
+    }
+    if (!values.sleepingAccommodations) {
+        errors.sleepingAccommodations = "required";
+    }
 
     return errors;
 };

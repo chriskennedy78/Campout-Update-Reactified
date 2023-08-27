@@ -172,6 +172,12 @@ const ReservationForm = () => {
                                         as="select"
                                         className="form-control"
                                         disabled={!values.cabinName}
+                                        onChange={(event) => {
+                                            handleChange(event);
+                                            selectedAccommodation(
+                                                event.target.value
+                                            );
+                                        }}
                                     >
                                         <option value="">Select...</option>
                                         {selectedCabin &&
