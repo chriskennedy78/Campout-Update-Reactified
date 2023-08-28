@@ -16,7 +16,7 @@ import { MEMBERSHIPS } from "../app/shared/MEMBERSHIPS";
 const MembershipForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedMembership, setSelectedMembership] = useState("");
-    const [membershipCost, setMembershipCost] = useState("");
+    const [membershipCost, setMembershipCost] = useState(0);
 
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
@@ -29,8 +29,8 @@ const MembershipForm = () => {
         const selectedMembership = MEMBERSHIPS.find(
             (membership) => membership.id === parseInt(event.target.value)
         );
-        setSelectedMembership(selectedMembership ? selectedMembership.id : "");
-        setMembershipCost(selectedMembership ? selectedMembership.cost : "");
+        setSelectedMembership(selectedMembership);
+        setMembershipCost(selectedMembership ? selectedMembership.cost : 0);
     };
 
     return (
@@ -146,7 +146,6 @@ const MembershipForm = () => {
                                         as="select"
                                         className="form-control"
                                         onChange={handleMembershipChange}
-                                        value={selectedMembership}
                                     >
                                         <option value="">
                                             Select a Membership Type
@@ -160,11 +159,15 @@ const MembershipForm = () => {
                                             </option>
                                         ))}
                                     </Field>
-                                    <Row>
-                                        {selectedMembership && (
-                                            <h5>Cost: ${membershipCost}</h5>
-                                        )}
-                                    </Row>
+                                    {selectedMembership && (
+                                        <div>
+                                            <p>
+                                                Selected Membership:{" "}
+                                                {selectedMembership.name}
+                                            </p>
+                                            <p>Cost: ${membershipCost}</p>
+                                        </div>
+                                    )}
                                     <ErrorMessage name="membershipType">
                                         {(msg) => (
                                             <p className="text-danger">{msg}</p>
