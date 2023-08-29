@@ -10,11 +10,15 @@ import {
 } from "reactstrap";
 import { Formik, Field, Form } from "formik";
 import { TICKETS } from "../app/shared/TICKETS";
+import { AMENITIES } from "../app/shared/AMENITIES";
+import { CAMPINGOPTIONS } from "../app/shared/CAMPINGOPTIONS";
 
 const TicketForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState("");
     const [selectedDuration, setSelectedTicketDuration] = useState("");
+    const [selectedAmenities, setSelectedAmenities] = useState("");
+    const [slectedCampingOptions, setSelectedCampingOptions] = useState("");
 
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
@@ -80,50 +84,62 @@ const TicketForm = () => {
                                             (ticket) =>
                                                 ticket.type === selectedTicket
                                         ).ticketDuration.map((duration) => {
-                                            const isChecked =
-                                                values.ticketDuration.includes(
-                                                    duration.id
-                                                );
                                             return (
                                                 <div key={duration.id}>
                                                     <label>
                                                         <input
                                                             type="checkbox"
-                                                            name={`ticketDuration.${duration.id}`}
+                                                            name="ticketDuration"
                                                             value={duration.id}
-                                                            checked={isChecked}
-                                                            onChange={(
-                                                                event
-                                                            ) => {
-                                                                const durationId =
-                                                                    duration.id;
-                                                                const newDuration =
-                                                                    isChecked
-                                                                        ? values.ticketDuration.filter(
-                                                                              (
-                                                                                  id
-                                                                              ) =>
-                                                                                  id !==
-                                                                                  durationId
-                                                                          )
-                                                                        : [
-                                                                              ...values.ticketDuration,
-                                                                              durationId,
-                                                                          ];
-
-                                                                handleChange({
-                                                                    target: {
-                                                                        name: "ticketDuration",
-                                                                        value: newDuration,
-                                                                    },
-                                                                });
-                                                            }}
                                                         />
                                                         {duration.duration}
                                                     </label>
                                                 </div>
                                             );
                                         })}
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="amenities">Amenities</Label>
+                                    {AMENITIES.map((amenities) => {
+                                        return (
+                                            <div key={amenities.id}>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="amenities"
+                                                        value={amenities.id}
+                                                    />
+                                                    {amenities.type} - $
+                                                    {amenities.cost}
+                                                </label>
+                                            </div>
+                                        );
+                                    })}
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label htmlFor="campingOptions">
+                                        Camping Options
+                                    </Label>
+                                    <Field
+                                        name="campingOptions"
+                                        as="select"
+                                        className="form-control"
+                                        onChange={(event) => {
+                                            handleChange(event);
+                                            setSelectedCampingOptions(event);
+                                        }}
+                                    >
+                                        <option value="">Select...</option>
+                                        {CAMPINGOPTIONS.map((options) => (
+                                            <option
+                                                key={options.id}
+                                                value={options.type}
+                                            >
+                                                {options.type}
+                                            </option>
+                                        ))}
+                                    </Field>
                                 </FormGroup>
 
                                 <FormGroup>
@@ -143,3 +159,64 @@ const TicketForm = () => {
 };
 
 export default TicketForm;
+
+// COMPLICATED TICKET DURATION
+
+// {
+//     /* <FormGroup>
+//                                     <Label htmlFor="ticketDurations">
+//                                         Ticket Durations
+//                                     </Label>
+//                                     {selectedTicket &&
+//                                         TICKETS.find(
+//                                             (ticket) =>
+//                                                 ticket.type === selectedTicket
+//                                         ).ticketDuration.map((duration) => { */
+// }
+// const isChecked =
+//     values.ticketDuration.includes(
+//         duration.id
+//     );
+// return (
+//     <div key={duration.id}>
+//         <label>
+//             <input
+//                 type="checkbox"
+//                 name={`ticketDuration.${duration.id}`}
+//                 value={duration.id}
+// checked={isChecked}
+// onChange={(
+//     event
+// ) => {
+//     const durationId =
+//         duration.id;
+//     const newDuration =
+//         isChecked
+//             ? values.ticketDuration.filter(
+//                   (
+//                       id
+//                   ) =>
+//                       id !==
+//                       durationId
+//               )
+//             : [
+//                   ...values.ticketDuration,
+//                   durationId,
+//               ];
+
+//     handleChange({
+//         target: {
+//             name: "ticketDuration",
+//             value: newDuration,
+//         },
+//     });
+// }}
+// />
+// {
+//     /* {duration.duration}
+//                                                     </label>
+//                                                 </div>
+//                                             );
+//                                         })}
+//                                 </FormGroup> */
+// }
