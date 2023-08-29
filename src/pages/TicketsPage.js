@@ -1,15 +1,8 @@
-import {
-    Col,
-    Row,
-    Container,
-    Card,
-    CardBody,
-    CardHeader,
-    CardTitle,
-} from "reactstrap";
+import { Col, Row, Container } from "reactstrap";
 import SubHeader from "../components/SubHeader";
-import ArtistsList from "../features/artists/ArtistsList";
+// import ArtistsList from "../features/artists/ArtistsList";
 import TicketsList from "../features/tickets/TicketsList";
+import TicketForm from "../components/TicketForm";
 
 const TicketsPage = () => {
     return (
@@ -28,11 +21,11 @@ const TicketsPage = () => {
             <Row>
                 <TicketsList />
             </Row>
-            {/* <Row>
+            <Row>
                 <Col>
-                    <TicketForm ticket={ticket} />
+                    <TicketForm />
                 </Col>
-            </Row> */}
+            </Row>
             {/* <Row>
                 <h1>Music Festival Line Up</h1>
                 <ArtistsList />

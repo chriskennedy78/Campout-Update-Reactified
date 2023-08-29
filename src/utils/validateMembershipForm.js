@@ -26,5 +26,8 @@ export const validateMembershipForm = (values) => {
         errors.email = "Email should contain a @";
     }
 
+    // if (!values.membershipType) {
+    //     errors.membershipType = "required";
+    // }
     return errors;
 };

@@ -7,11 +7,11 @@ import {
     Modal,
     ModalBody,
     ModalHeader,
-    Row,
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { validateMembershipForm } from "../utils/validateMembershipForm";
+
 import { MEMBERSHIPS } from "../app/shared/MEMBERSHIPS";
+import { validateMembershipForm } from "../utils/validateMembershipForm";
 
 const MembershipForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -21,6 +21,15 @@ const MembershipForm = () => {
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
         console.log("in JSON format:", JSON.stringify(values));
+        resetForm();
+        setSelectedMembership(""); // Clear selected membership
+        setMembershipCost(0); // Clear membership cost
+        setModalOpen(false);
+    };
+
+    const handleCloseModal = (values, { resetForm }) => {
+        setSelectedMembership(null); // Reset selected membership
+        setMembershipCost(0); // Reset membership cost
         resetForm();
         setModalOpen(false);
     };
@@ -32,13 +41,19 @@ const MembershipForm = () => {
         setSelectedMembership(selectedMembership);
         setMembershipCost(selectedMembership ? selectedMembership.cost : 0);
     };
+    console.log("Selected Membership Object:", selectedMembership);
+    console.log(
+        "Membership Cost:",
+        selectedMembership ? selectedMembership.cost : 0
+    );
 
     return (
         <>
             <Button outline onClick={() => setModalOpen(true)}>
                 <i className="fa fa-pencil fa-lg" /> Purchase Membership
             </Button>
-            <Modal isOpen={modalOpen}>
+            {/* added toggle here to try and clear the membership field when modal closed...it doesnt work*/}
+            <Modal isOpen={modalOpen} toggle={handleCloseModal}>
                 <ModalHeader toggle={() => setModalOpen(false)}>
                     Membership Information and Type
                 </ModalHeader>
@@ -146,6 +161,11 @@ const MembershipForm = () => {
                                         as="select"
                                         className="form-control"
                                         onChange={handleMembershipChange}
+                                        value={
+                                            selectedMembership
+                                                ? selectedMembership.id
+                                                : ""
+                                        }
                                     >
                                         <option value="">
                                             Select a Membership Type
@@ -159,22 +179,17 @@ const MembershipForm = () => {
                                             </option>
                                         ))}
                                     </Field>
-                                    {selectedMembership && (
-                                        <div>
-                                            <p>
-                                                Selected Membership:{" "}
-                                                {selectedMembership.name}
-                                            </p>
-                                            <p>Cost: ${membershipCost}</p>
-                                        </div>
-                                    )}
-                                    <ErrorMessage name="membershipType">
+                                    {/* <ErrorMessage name="membershipType">
                                         {(msg) => (
                                             <p className="text-danger">{msg}</p>
                                         )}
-                                    </ErrorMessage>
+                                    </ErrorMessage> */}
+                                    {selectedMembership && (
+                                        <div>
+                                            <p>Cost: ${membershipCost}</p>
+                                        </div>
+                                    )}
                                 </FormGroup>
-
                                 <FormGroup row>
                                     <Label check md={{ size: 4, offset: 2 }}>
                                         <Field

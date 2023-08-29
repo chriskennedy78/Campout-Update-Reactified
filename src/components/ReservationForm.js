@@ -26,7 +26,7 @@ const ReservationForm = () => {
 
     const handleCabinChange = (event) => {
         setSelectedCabin(event.target.value);
-        setSelectedAccommodation("");
+        setSelectedAccommodation([]);
     };
 
     return (
@@ -48,7 +48,7 @@ const ReservationForm = () => {
                             agree: false,
                             contactType: "By Phone",
                             cabinName: "",
-                            sleepingAccommodations: "",
+                            accommodations: "",
                         }}
                         onSubmit={handleSubmit}
                         validate={validateReservationForm}
@@ -137,7 +137,7 @@ const ReservationForm = () => {
                                 <FormGroup>
                                     <Label htmlFor="cabinName">
                                         Cabin Name
-                                    </Label>{" "}
+                                    </Label>
                                     <Field
                                         name="cabinName"
                                         as="select"
@@ -164,11 +164,11 @@ const ReservationForm = () => {
                                     </ErrorMessage>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label htmlFor="sleepingAccommodations">
+                                    <Label htmlFor="accommodations">
                                         Sleeping Accommodations
                                     </Label>
                                     <Field
-                                        name="sleepingAccommodations"
+                                        name="accommodations"
                                         as="select"
                                         className="form-control"
                                         disabled={!values.cabinName}
@@ -199,7 +199,7 @@ const ReservationForm = () => {
                                                 )
                                             )}
                                     </Field>
-                                    <ErrorMessage name="sleepingAccommodations">
+                                    <ErrorMessage name="accommodations">
                                         {(msg) => (
                                             <p className="text-danger">{msg}</p>
                                         )}
