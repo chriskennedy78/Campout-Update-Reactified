@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
     Button,
     Label,
+    Row,
     Col,
     FormGroup,
     Modal,
@@ -12,13 +13,17 @@ import { Formik, Field, Form } from "formik";
 import { TICKETS } from "../app/shared/TICKETS";
 import { AMENITIES } from "../app/shared/AMENITIES";
 import { CAMPINGOPTIONS } from "../app/shared/CAMPINGOPTIONS";
+import { RVOPTIONS } from "../app/shared/RVOPTIONS";
+import { GROUPSITES } from "../app/shared/GROUPSITES";
 
 const TicketForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState("");
     const [selectedDuration, setSelectedTicketDuration] = useState("");
     const [selectedAmenities, setSelectedAmenities] = useState("");
-    const [slectedCampingOptions, setSelectedCampingOptions] = useState("");
+    const [selectedCampingOptions, setSelectedCampingOptions] = useState("");
+    const [selectedRvOptions, setSelectedRvOptions] = useState("");
+    const [selectedGroupSite, setGroupSite] = useState("");
 
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
@@ -116,7 +121,6 @@ const TicketForm = () => {
                                         );
                                     })}
                                 </FormGroup>
-
                                 <FormGroup>
                                     <Label htmlFor="campingOptions">
                                         Camping Options
@@ -127,7 +131,9 @@ const TicketForm = () => {
                                         className="form-control"
                                         onChange={(event) => {
                                             handleChange(event);
-                                            setSelectedCampingOptions(event);
+                                            setSelectedCampingOptions(
+                                                event.target.value
+                                            );
                                         }}
                                     >
                                         <option value="">Select...</option>
@@ -141,6 +147,114 @@ const TicketForm = () => {
                                         ))}
                                     </Field>
                                 </FormGroup>
+                                {selectedCampingOptions === "RV/Camper" && (
+                                    <Row>
+                                        <Col>
+                                            <FormGroup>
+                                                <Label htmlFor="rvInfo">
+                                                    RV Info
+                                                </Label>
+                                                <Field
+                                                    name="rvInfo"
+                                                    as="select"
+                                                    className="form-control"
+                                                    onChange={(event) => {
+                                                        handleChange(event);
+                                                        setSelectedRvOptions(
+                                                            event.target.value
+                                                        );
+                                                    }}
+                                                >
+                                                    <option value="">
+                                                        Select...
+                                                    </option>
+                                                    {RVOPTIONS.map(
+                                                        (options) => (
+                                                            <option
+                                                                key={options.id}
+                                                                value={
+                                                                    options.rvStyle
+                                                                }
+                                                            >
+                                                                {
+                                                                    options.rvStyle
+                                                                }
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </Field>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col>
+                                            <FormGroup row>
+                                                <Label htmlFor="rvLength">
+                                                    RV/Camper Length
+                                                </Label>
+                                                <Col md="10">
+                                                    <Field
+                                                        name="rvLength"
+                                                        placeholder="Enter Length in feet"
+                                                        className="form-control"
+                                                    />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                )}
+
+                                {selectedCampingOptions ===
+                                    "group campsite" && (
+                                    <Row>
+                                        <Col>
+                                            <FormGroup>
+                                                <Label htmlFor="groupSite">
+                                                    Requested Group Site
+                                                </Label>
+                                                <Field
+                                                    name="groupSite"
+                                                    as="select"
+                                                    className="form-control"
+                                                    onChange={(event) => {
+                                                        handleChange(event);
+                                                        setGroupSite(
+                                                            event.target.value
+                                                        );
+                                                    }}
+                                                >
+                                                    <option value="">
+                                                        Select...
+                                                    </option>
+                                                    {GROUPSITES.map(
+                                                        (options) => (
+                                                            <option
+                                                                key={options.id}
+                                                                value={
+                                                                    options.name
+                                                                }
+                                                            >
+                                                                {options.name}
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </Field>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col>
+                                            <FormGroup row>
+                                                <Label htmlFor="groupName">
+                                                    Name of Group
+                                                </Label>
+                                                <Col md="10">
+                                                    <Field
+                                                        name="groupName"
+                                                        placeholder="Enter Group Name"
+                                                        className="form-control"
+                                                    />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                )}
 
                                 <FormGroup>
                                     <Col md={{ size: 10, offset: 2 }}>

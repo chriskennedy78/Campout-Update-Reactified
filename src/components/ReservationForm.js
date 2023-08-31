@@ -174,7 +174,7 @@ const ReservationForm = () => {
                                         disabled={!values.cabinName}
                                         onChange={(event) => {
                                             handleChange(event);
-                                            selectedAccommodation(
+                                            setSelectedAccommodation(
                                                 event.target.value
                                             );
                                         }}
