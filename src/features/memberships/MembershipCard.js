@@ -1,4 +1,4 @@
-import { Card, CardBody, CardTitle, Row } from "reactstrap";
+import { Card, CardBody, CardHeader, CardTitle, Row } from "reactstrap";
 
 // this card is deconstructed by listing the keys in the {} and assigning them to the object name.
 const MembershipCard = ({ membership }) => {
@@ -6,8 +6,9 @@ const MembershipCard = ({ membership }) => {
     return (
         <Row>
             <Card>
-                <CardTitle>{name}</CardTitle>
-
+                <CardHeader className="bg-primary text-white">
+                    {name}
+                </CardHeader>
                 <CardBody>
                     {description}
                     <br />

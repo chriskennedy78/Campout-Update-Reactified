@@ -1,4 +1,12 @@
-import { Card, CardImg, CardText, CardBody, Col, Row } from "reactstrap";
+import {
+    Card,
+    CardImg,
+    CardText,
+    CardBody,
+    Col,
+    Row,
+    CardHeader,
+} from "reactstrap";
 
 const CabinDetail = ({ cabin }) => {
     const { image, name, description, sleepingArrangements } = cabin;
@@ -12,9 +20,11 @@ const CabinDetail = ({ cabin }) => {
             </Col>
             <Col>
                 <Card>
+                    <CardHeader className="bg-primary text-white">
+                        <h3>{sleepingArrangements}</h3>
+                    </CardHeader>
                     <CardBody>
                         <CardText>
-                            <h3>{sleepingArrangements}</h3>
                             <Row>{description}</Row>
                         </CardText>
                     </CardBody>
