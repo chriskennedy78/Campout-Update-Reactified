@@ -9,6 +9,8 @@ import {
     ModalHeader,
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { validateReservationForm } from "../utils/validateReservationForm";
 import { CABINS } from "../app/shared/CABINS";
 
@@ -16,6 +18,8 @@ const ReservationForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCabin, setSelectedCabin] = useState("");
     const [selectedAccommodation, setSelectedAccommodation] = useState("");
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
 
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
@@ -49,6 +53,8 @@ const ReservationForm = () => {
                             contactType: "By Phone",
                             cabinName: "",
                             accommodations: "",
+                            arrivalDate: "",
+                            departureDate: "",
                         }}
                         onSubmit={handleSubmit}
                         validate={validateReservationForm}
@@ -206,6 +212,23 @@ const ReservationForm = () => {
                                     </ErrorMessage>
                                 </FormGroup>
 
+                                <FormGroup row>
+                                    <Col>
+                                        <Label>Select Reservations Dates</Label>
+                                    </Col>
+
+                                    <Col>
+                                        <DatePicker
+                                            selectsRange={true}
+                                            startDate={startDate}
+                                            endDate={endDate}
+                                            onChange={(update) => {
+                                                setDateRange(update);
+                                            }}
+                                            withPortal
+                                        />
+                                    </Col>
+                                </FormGroup>
                                 <FormGroup row>
                                     <Label check md={{ size: 4, offset: 2 }}>
                                         <Field
