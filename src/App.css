@@ -10,6 +10,9 @@ h3,
 .card-body > .card-title {
     font-family: 'Lobster', cursive;
 }
+h4{
+    color: white;
+}
 
 .card-title {
     font-weight: 500;
@@ -32,9 +35,11 @@ h2 {
 }
 
 .site-footer {
-    background-image: linear-gradient(#cec8ff, white);
-    padding: 20px 0;
+    background-image: linear-gradient(to bottom,  black, darkgray, gray);
+    padding-top: 70px;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+    color: white
 }
 
 .navbar-brand {
@@ -43,18 +48,18 @@ h2 {
     
 }
 
-.navbar-brand img {
-    width: 100%;
-    height: 100%;
+/* .navbar-brand img {
+    width: 400%;
+    height: 200%;
     margin-right: 2rem;
     max-width: 4rem;
-}
+} */
 
 .navbar-dark {
     background-color: #901cad;
-    background-image: linear-gradient(to right, #5637dd, #3046c5, #510e5a);
+    background-image: linear-gradient(to right,rgb(0, 65, 139), teal, rgb(0, 65, 139));
     margin-bottom: 2rem;
-    min-height: 8rem;
+    min-height: 4rem;
 }
 
 .page-enter {
