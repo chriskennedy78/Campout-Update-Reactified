@@ -10,28 +10,28 @@ export const TICKETS = [
             {
                 id: 0,
                 duration: "Full Weekend (Friday-Monday)",
-                price: 130.0,
+                price: 130,
             },
             {
                 id: 1,
                 duration:
                     "Add on Thursday + $15.00 (added to full weekend ticket price)",
-                price: 15.0,
+                price: 15,
             },
             {
                 id: 2,
                 duration: "Friday Only (must depart by midnight)",
-                price: 55.0,
+                price: 55,
             },
             {
                 id: 3,
                 duration: "Saturday Only (must depart by midnight)",
-                price: 80.0,
+                price: 80,
             },
             {
                 id: 4,
                 duration: "Sunday Only (must depart by midnight)",
-                price: 60.0,
+                price: 60,
             },
         ],
     },
@@ -47,7 +47,7 @@ export const TICKETS = [
             {
                 id: 0,
                 duration: "Full Weekend (Friday-Monday)",
-                price: 50.0,
+                price: 50,
             },
         ],
     },
@@ -63,7 +63,7 @@ export const TICKETS = [
             {
                 id: 0,
                 duration: "Full Weekend (Friday-Monday)",
-                price: 155.0,
+                price: 155,
             },
         ],
     },

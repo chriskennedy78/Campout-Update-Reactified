@@ -14,18 +14,18 @@ import { MEMBERSHIPS } from "../app/shared/MEMBERSHIPS";
 import { validateMembershipForm } from "../utils/validateMembershipForm";
 
 const MembershipForm = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedMembership, setSelectedMembership] = useState("");
-    const [membershipCost, setMembershipCost] = useState(0);
-
     const handleSubmit = (values, { resetForm }) => {
         console.log("form values:", values);
         console.log("in JSON format:", JSON.stringify(values));
+        console.log("membership cost line 24:", membershipCost);
         resetForm();
         setSelectedMembership(""); // Clear selected membership
         setMembershipCost(0); // Clear membership cost
         setModalOpen(false);
     };
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedMembership, setSelectedMembership] = useState("");
+    const [membershipCost, setMembershipCost] = useState(0);
 
     const handleCloseModal = (values, { resetForm }) => {
         setSelectedMembership(null); // Reset selected membership
@@ -43,7 +43,7 @@ const MembershipForm = () => {
     };
     console.log("Selected Membership Object:", selectedMembership);
     console.log(
-        "Membership Cost:",
+        "Membership Cost handlechange:",
         selectedMembership ? selectedMembership.cost : 0
     );
 
@@ -179,11 +179,6 @@ const MembershipForm = () => {
                                             </option>
                                         ))}
                                     </Field>
-                                    {/* <ErrorMessage name="membershipType">
-                                        {(msg) => (
-                                            <p className="text-danger">{msg}</p>
-                                        )}
-                                    </ErrorMessage> */}
                                     {selectedMembership && (
                                         <div>
                                             <p>Cost: ${membershipCost}</p>

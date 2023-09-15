@@ -20,16 +20,28 @@ const TicketForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState("");
     const [selectedDuration, setSelectedTicketDuration] = useState("");
-    const [selectedAmenities, setSelectedAmenities] = useState("");
     const [selectedCampingOptions, setSelectedCampingOptions] = useState("");
     const [selectedRvOptions, setSelectedRvOptions] = useState("");
     const [selectedGroupSite, setGroupSite] = useState("");
+    const [totalCost, setTotalCost] = useState(0);
 
     const handleSubmit = (values, { resetForm }) => {
+        let cost = 0;
+        if (values.hasMembership === "no") {
+            if (values.membershipType === "occasional") {
+                cost += 25;
+            } else if (values.membershipType === "frequent") {
+                cost += 60;
+            }
+        }
+        setTotalCost(cost);
+
         console.log("form values:", values);
         console.log("in JSON format:", JSON.stringify(values));
+        console.log("Total Cost:", cost);
         resetForm();
         setModalOpen(false);
+        setSelectedTicket("");
     };
 
     const handleTicketChange = (event) => {
@@ -49,13 +61,79 @@ const TicketForm = () => {
                 <ModalBody>
                     <Formik
                         initialValues={{
+                            hasMembership: "",
+                            membershipNumber: "",
+                            membershipType: "",
                             ticketType: "",
                             ticketDuration: [],
+                            amenities: "",
+                            ticketPrice: 0,
                         }}
                         onSubmit={handleSubmit}
                     >
                         {({ values, handleChange }) => (
                             <Form>
+                                <FormGroup>
+                                    <Row>Membership Status</Row>
+                                    <Row>
+                                        <Label>
+                                            <Field
+                                                type="radio"
+                                                name="hasMembership"
+                                                value="yes"
+                                            />
+                                            Yes, I have a membership
+                                        </Label>
+                                    </Row>
+                                    {values.hasMembership === "yes" && (
+                                        <FormGroup>
+                                            <Label htmlFor="membershipNumber">
+                                                Membership Number:
+                                            </Label>
+                                            <Field
+                                                type="text"
+                                                name="membershipNumber"
+                                                id="membershipNumber"
+                                            />
+                                        </FormGroup>
+                                    )}
+                                    <Row>
+                                        <Label>
+                                            <Field
+                                                type="radio"
+                                                name="hasMembership"
+                                                value="no"
+                                            />
+                                            No, I don't have a membership
+                                        </Label>
+                                    </Row>
+                                    {values.hasMembership === "no" && (
+                                        <FormGroup>
+                                            <Label htmlFor="membershipType">
+                                                Select Membership Type:
+                                            </Label>
+                                            <Field
+                                                onChange={(event) => {
+                                                    handleChange(event);
+                                                }}
+                                                as="select"
+                                                name="membershipType"
+                                                id="membershipType"
+                                            >
+                                                <option value="">
+                                                    Select Type
+                                                </option>
+                                                <option value="occasional">
+                                                    Occasional Use: $25
+                                                </option>
+                                                <option value="frequent">
+                                                    Frequent Use: $60
+                                                </option>
+                                            </Field>
+                                        </FormGroup>
+                                    )}
+                                </FormGroup>
+
                                 <FormGroup>
                                     <Label htmlFor="ticketType">
                                         Ticket Type
@@ -80,16 +158,17 @@ const TicketForm = () => {
                                         ))}
                                     </Field>
                                 </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="ticketDurations">
-                                        Ticket Durations
-                                    </Label>
-                                    {selectedTicket &&
-                                        TICKETS.find(
-                                            (ticket) =>
-                                                ticket.type === selectedTicket
-                                        ).ticketDuration.map((duration) => {
-                                            return (
+
+                                {selectedTicket &&
+                                    TICKETS.find(
+                                        (ticket) =>
+                                            ticket.type === selectedTicket
+                                    ).ticketDuration.map((duration) => {
+                                        return (
+                                            <FormGroup>
+                                                <Label htmlFor="ticketDurations">
+                                                    Ticket Duration
+                                                </Label>
                                                 <div key={duration.id}>
                                                     <label>
                                                         <input
@@ -100,9 +179,10 @@ const TicketForm = () => {
                                                         {duration.duration}
                                                     </label>
                                                 </div>
-                                            );
-                                        })}
-                                </FormGroup>
+                                            </FormGroup>
+                                        );
+                                    })}
+
                                 <FormGroup>
                                     <Label htmlFor="amenities">Amenities</Label>
                                     {AMENITIES.map((amenities) => {
@@ -257,6 +337,12 @@ const TicketForm = () => {
                                 )}
 
                                 <FormGroup>
+                                    <Label htmlFor="totalCost">
+                                        Total Cost: ${totalCost}
+                                    </Label>
+                                </FormGroup>
+
+                                <FormGroup>
                                     <Col md={{ size: 10, offset: 2 }}>
                                         <Button type="submit" color="primary">
                                             Purchase Tickets
@@ -273,64 +359,3 @@ const TicketForm = () => {
 };
 
 export default TicketForm;
-
-// COMPLICATED TICKET DURATION
-
-// {
-//     /* <FormGroup>
-//                                     <Label htmlFor="ticketDurations">
-//                                         Ticket Durations
-//                                     </Label>
-//                                     {selectedTicket &&
-//                                         TICKETS.find(
-//                                             (ticket) =>
-//                                                 ticket.type === selectedTicket
-//                                         ).ticketDuration.map((duration) => { */
-// }
-// const isChecked =
-//     values.ticketDuration.includes(
-//         duration.id
-//     );
-// return (
-//     <div key={duration.id}>
-//         <label>
-//             <input
-//                 type="checkbox"
-//                 name={`ticketDuration.${duration.id}`}
-//                 value={duration.id}
-// checked={isChecked}
-// onChange={(
-//     event
-// ) => {
-//     const durationId =
-//         duration.id;
-//     const newDuration =
-//         isChecked
-//             ? values.ticketDuration.filter(
-//                   (
-//                       id
-//                   ) =>
-//                       id !==
-//                       durationId
-//               )
-//             : [
-//                   ...values.ticketDuration,
-//                   durationId,
-//               ];
-
-//     handleChange({
-//         target: {
-//             name: "ticketDuration",
-//             value: newDuration,
-//         },
-//     });
-// }}
-// />
-// {
-//     /* {duration.duration}
-//                                                     </label>
-//                                                 </div>
-//                                             );
-//                                         })}
-//                                 </FormGroup> */
-// }
